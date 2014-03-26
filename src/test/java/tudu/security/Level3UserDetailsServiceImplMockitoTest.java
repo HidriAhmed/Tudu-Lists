@@ -72,7 +72,7 @@ public class Level3UserDetailsServiceImplMockitoTest {
 				springSecurityUser.getAuthorities().iterator().next()
 						.getAuthority());
 
-		verify(userService).enableUser("test_user");
+		verify(userService).findUser("test_user");
 	}
 	// Pour aller plus loin : Should you only mock types that you own ?:
 	// http://stackoverflow.com/questions/1906344/should-you-only-mock-types-you-own
