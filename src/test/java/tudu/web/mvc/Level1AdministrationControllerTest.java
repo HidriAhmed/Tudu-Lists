@@ -1,65 +1,112 @@
 package tudu.web.mvc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
+
 import tudu.domain.Property;
+import tudu.domain.User;
 import tudu.service.ConfigurationService;
 import tudu.service.UserService;
-
-import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Answers.RETURNS_SMART_NULLS;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Level1AdministrationControllerTest {
 
-    @Mock
-    private ConfigurationService cfgService;
-    @Mock
-    private UserService userService;
+	private static final String STATIC_PATH_PROPERTY_NAME = "application.static.path";
+	private static final String GOOGLE_ANALYTICS_PROPERTY_NAME = "google.analytics.key";
+	private static final String HOST_PROPERTY_NAME = "smtp.host";
+	private static final String PORT_PROPERTY_NAME = "smtp.port";
+	private static final String USER_PROPERTY_NAME = "smtp.user";
+	private static final String PASSWORD_PROPERTY_NAME = "smtp.password";
+	private static final String FROM_PROPERTY_NAME = "smtp.from";
 
-    @InjectMocks
-    private AdministrationController adminController = new AdministrationController();
+	AdministrationModel administrationModel = new AdministrationModel();
+	List<User> users = new ArrayList<User>();
 
+	@Mock
+	private ConfigurationService cfgService;
+	@Mock
+	private UserService userService;
 
-    /*
-    * Vérifier dans un test que pour la page "configuration" les propriétés smtp (et uniquement celles là) soit donnée au model
-    * Méthode :  display
-    */
-    @Test
-    public void display_should_put_smtp_config_properties_in_admin_model_when_page_is_configuration() throws Exception {
-        // given
+	@InjectMocks
+	private AdministrationController adminController;
 
-        // when
+	@Before
+	public void before() {
+		MockitoAnnotations.initMocks(this);
 
-        // then
-     }
+		administrationModel.setSearchLogin("test_user");
+		User user = new User();
+		user.setLogin("my_test_user");
+		user.setPassword("a_Test_Password");
 
-    /*
-   * Vérifier que l update ne retourne pas un modele null
-   * */
-    @Test
-    public void update_shouldnt_return_a_null_model() throws Exception {
-         // given
+	}
 
-        // when
+	/*
+	 * Vérifier dans un test que pour la page "configuration" les propriétés
+	 * smtp (et uniquement celles là) soit donnée au model Méthode : display
+	 */
+	@Test
+	public void display_should_put_smtp_config_properties_in_admin_model_when_page_is_configuration()
+			throws Exception {
+		// assign
+		when(cfgService.getProperty(STATIC_PATH_PROPERTY_NAME)).thenReturn(
+				property("staticPath"));
+		when(cfgService.getProperty(GOOGLE_ANALYTICS_PROPERTY_NAME))
+				.thenReturn(property("googleAnalytics"));
+		when(cfgService.getProperty(HOST_PROPERTY_NAME)).thenReturn(
+				property("smtpHost"));
+		when(cfgService.getProperty(PORT_PROPERTY_NAME)).thenReturn(
+				property("smtpPort"));
+		when(cfgService.getProperty(USER_PROPERTY_NAME)).thenReturn(
+				property("smtpUser"));
+		when(cfgService.getProperty(PASSWORD_PROPERTY_NAME)).thenReturn(
+				property("smtpPassword"));
+		when(cfgService.getProperty(FROM_PROPERTY_NAME)).thenReturn(
+				property("smtpFrom"));
 
-        // then
-    }
+		// act
+		ModelAndView result = adminController.display("configuration");
 
+		AdministrationModel resultModel = (AdministrationModel) result
+				.getModel().get("administrationModel");
 
-    private Property property(String value) {
-        Property property = new Property();
-        property.setValue(value);
-        return property;
-    }
+		// assert
+		assertThat(resultModel.getSmtpFrom()).isNotEmpty();
+		assertThat(resultModel.getSmtpHost()).isNotEmpty();
+		assertThat(resultModel.getSmtpPassword()).isNotEmpty();
+		assertThat(resultModel.getSmtpPort()).isNotEmpty();
+		assertThat(resultModel.getSmtpUser()).isNotEmpty();
+	}
+
+	/*
+	 * Vérifier que l update ne retourne pas un modele null
+	 */
+	@Test
+	public void update_shouldnt_return_a_null_model() throws Exception {
+		// assign
+		when(userService.findUsersByLogin("test_user")).thenReturn(users);
+
+		// act
+		ModelAndView resultModel = adminController.update(administrationModel);
+		// assert
+		assertThat(resultModel).isNotNull();
+	}
+
+	private Property property(String value) {
+		Property property = new Property();
+		property.setValue(value);
+		return property;
+	}
 }

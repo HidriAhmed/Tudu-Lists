@@ -1,31 +1,48 @@
 package tudu.web.mvc;
 
+import org.junit.Before;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import tudu.service.ConfigurationService;
+import tudu.service.UserService;
 
 public class Level3AdministrationControllerTest {
 
+	@Mock
+	private ConfigurationService cfgService;
+	@Mock
+	private UserService userService;
 
-    /*
-    *  Vérifier La réponse par défaut du mock configService et faire un test avec la page configuration
-    *  Méthode :  display
-    *  Aide : configuaration du mock a l'aide de RETURNS_SMART_NULLS
-    */
+	@InjectMocks
+	private AdministrationController adminController;
 
-    /*
-    * Vérifier que le configService.updateEmailProperties est bien appelé en ne vérifiant que les valeurs user et password .
-    * Aide : Spy
-   * Méthode :  update
-    */
+	@Before
+	public void before() {
+		MockitoAnnotations.initMocks(this);
 
-/*
-* Reprendre sur quelques tests ayant des assertEquals, assertNull, assertNotNull avec le framefork fest assert
-*/
+	}
 
+	/*
+	 * Vérifier La réponse par défaut du mock configService et faire un test
+	 * avec la page configuration Méthode : display Aide : configuaration du
+	 * mock a l'aide de RETURNS_SMART_NULLS
+	 */
 
-/*
-* Reprendre sur quelques tests ayant des when, verify, doThrow en utilisant la syntaxe bdd mockito
-*/
+	/*
+	 * Vérifier que le configService.updateEmailProperties est bien appelé en ne
+	 * vérifiant que les valeurs user et password . Aide : Spy Méthode : update
+	 */
+
+	/*
+	 * Reprendre sur quelques tests ayant des assertEquals, assertNull,
+	 * assertNotNull avec le framefork fest assert
+	 */
+
+	/*
+	 * Reprendre sur quelques tests ayant des when, verify, doThrow en utilisant
+	 * la syntaxe bdd mockito
+	 */
 
 }
