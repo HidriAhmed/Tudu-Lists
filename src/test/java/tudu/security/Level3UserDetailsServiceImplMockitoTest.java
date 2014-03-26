@@ -6,9 +6,10 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import tudu.domain.Role;
@@ -16,6 +17,7 @@ import tudu.domain.RolesEnum;
 import tudu.domain.User;
 import tudu.service.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Level3UserDetailsServiceImplMockitoTest {
 
 	@Mock
@@ -25,7 +27,6 @@ public class Level3UserDetailsServiceImplMockitoTest {
 
 	@Before
 	public void init() {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	/*

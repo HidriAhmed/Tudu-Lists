@@ -9,13 +9,15 @@ import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import tudu.domain.TodoList;
 import tudu.domain.User;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Level3UserServiceImplMockitoTest {
 
 	User expectedUser = new User();
@@ -27,7 +29,6 @@ public class Level3UserServiceImplMockitoTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 		expectedUser.setLogin("test_user");
 		expectedUser.setFirstName("First name");
 		expectedUser.setLastName("Last name");

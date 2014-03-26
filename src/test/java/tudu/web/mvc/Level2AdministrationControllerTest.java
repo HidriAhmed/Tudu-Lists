@@ -8,15 +8,17 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
 import tudu.domain.Property;
 import tudu.service.ConfigurationService;
 import tudu.service.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Level2AdministrationControllerTest {
 
 	private static final String STATIC_PATH_PROPERTY_NAME = "application.static.path";
@@ -40,7 +42,6 @@ public class Level2AdministrationControllerTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 
 		adminModelToEnableUser.setAction("enableUser");
 		adminModelToDisableUser.setAction("disableUser");

@@ -8,14 +8,16 @@ import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.orm.ObjectRetrievalFailureException;
 
 import tudu.domain.User;
 import tudu.service.UserAlreadyExistsException;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Level1UserServiceImplMockitoTest {
 
 	User expectedUser = new User();
@@ -26,7 +28,6 @@ public class Level1UserServiceImplMockitoTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 		expectedUser.setLogin("test_user");
 		expectedUser.setFirstName("First name");
 		expectedUser.setLastName("Last name");

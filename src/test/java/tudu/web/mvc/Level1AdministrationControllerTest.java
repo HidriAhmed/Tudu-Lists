@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,7 +43,6 @@ public class Level1AdministrationControllerTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 
 		administrationModel.setSearchLogin("test_user");
 		User user = new User();

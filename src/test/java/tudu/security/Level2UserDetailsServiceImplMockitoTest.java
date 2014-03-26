@@ -4,9 +4,10 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -14,6 +15,7 @@ import tudu.domain.User;
 import tudu.service.impl.UserServiceImpl;
 
 //Niveau2
+@RunWith(MockitoJUnitRunner.class)
 public class Level2UserDetailsServiceImplMockitoTest {
 
 	@Mock
@@ -23,7 +25,6 @@ public class Level2UserDetailsServiceImplMockitoTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 
 	}
 

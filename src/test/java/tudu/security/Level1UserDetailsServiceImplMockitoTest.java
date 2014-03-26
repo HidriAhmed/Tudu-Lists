@@ -10,9 +10,10 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import tudu.domain.RolesEnum;
 import tudu.domain.User;
 import tudu.service.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Level1UserDetailsServiceImplMockitoTest {
 
 	User expectedUser = new User();
@@ -36,8 +38,6 @@ public class Level1UserDetailsServiceImplMockitoTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
-
 		expectedUser.setLogin("my_test_user");
 		expectedUser.setPassword("a_Test_Password");
 		Role userRole = new Role();

@@ -7,9 +7,10 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import tudu.domain.Role;
@@ -19,6 +20,7 @@ import tudu.service.impl.UserServiceImpl;
 
 //Niveau2
 //Enlever le @Ignore et trouver pourquoi la deuxieme methode ne fonctionne pas comme prevue comparee a la premiere
+@RunWith(MockitoJUnitRunner.class)
 public class Level2AttentionMockitoTest {
 	@Mock
 	UserServiceImpl userService;
@@ -27,7 +29,6 @@ public class Level2AttentionMockitoTest {
 
 	@Before
 	public void before() {
-		MockitoAnnotations.initMocks(this);
 
 	}
 
