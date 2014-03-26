@@ -233,7 +233,7 @@ public class UserServiceImpl implements UserService {
 	 * @see tudu.service.UserService#findUser(String)
 	 */
 	@Transactional(readOnly = true)
-	public User findUserJoke(String login) {
+	public final User findUserJoke(String login) {
 		User user = em.find(User.class, login);
 		if (user == null) {
 			if (log.isDebugEnabled()) {
