@@ -1,5 +1,6 @@
 package tudu.web.mvc;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -26,7 +27,8 @@ public class Level2AdministrationControllerTest {
 	private static final String PASSWORD_PROPERTY_NAME = "smtp.password";
 	private static final String FROM_PROPERTY_NAME = "smtp.from";
 
-	AdministrationModel administrationModel = new AdministrationModel();
+	AdministrationModel adminModelToEnableUser = new AdministrationModel();
+	AdministrationModel adminModelToDisableUser = new AdministrationModel();
 
 	@Mock
 	private ConfigurationService cfgService;
@@ -40,8 +42,10 @@ public class Level2AdministrationControllerTest {
 	public void before() {
 		MockitoAnnotations.initMocks(this);
 
-		administrationModel.setAction("enableUser");
-		administrationModel.setLogin("test_user");
+		adminModelToEnableUser.setAction("enableUser");
+		adminModelToDisableUser.setAction("disableUser");
+		adminModelToEnableUser.setLogin("test_user");
+		adminModelToDisableUser.setLogin("test_user");
 	}
 
 	/*
@@ -51,7 +55,7 @@ public class Level2AdministrationControllerTest {
 	@Test
 	public void display_should_not_interact_when_page_different_than_configuration_or_users()
 			throws Exception {
-		// assign
+		// arrange
 
 		// act
 		ModelAndView result = adminController.display("test");
@@ -67,7 +71,7 @@ public class Level2AdministrationControllerTest {
 	@Test
 	public void display_should_read_configService_properties_when_page_is_configuration()
 			throws Exception {
-		// assign
+		// arrange
 		when(cfgService.getProperty(STATIC_PATH_PROPERTY_NAME)).thenReturn(
 				property("staticPath"));
 		when(cfgService.getProperty(GOOGLE_ANALYTICS_PROPERTY_NAME))
@@ -94,10 +98,9 @@ public class Level2AdministrationControllerTest {
 	 */
 	@Test
 	public void update_enable_user_on_enableUser_action() throws Exception {
-		// assign
-
+		// arrange
 		// act
-		adminController.update(administrationModel);
+		adminController.update(adminModelToEnableUser);
 		// assert
 		verify(userService).enableUser("test_user");
 		verify(userService, never()).disableUser("test_user");
@@ -111,6 +114,12 @@ public class Level2AdministrationControllerTest {
 	@Test
 	public void update_can_disable_user_on_disableUser_action()
 			throws Exception {
+		// arrange
+		// act
+		adminController.update(adminModelToDisableUser);
+		// assert
+		verify(userService, atLeastOnce()).disableUser("test_user");
+		verify(userService, never()).enableUser("test_user");
 	}
 
 	/*
@@ -121,7 +130,16 @@ public class Level2AdministrationControllerTest {
 	@Test
 	public void update_should_fetch_users_on_login_after_disabling_suer()
 			throws Exception {
+		// arrange
+		// act
+		adminController.update(adminModelToDisableUser);
+		// assert
+		verify(userService).disableUser("test_user");
 
+		// act
+		adminController.update(adminModelToEnableUser);
+		// assert
+		verify(userService).disableUser("test_user");
 	}
 
 	private Property property(String value) {
