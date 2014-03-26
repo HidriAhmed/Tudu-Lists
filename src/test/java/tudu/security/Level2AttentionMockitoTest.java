@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -76,7 +77,10 @@ public class Level2AttentionMockitoTest {
 
 	}
 
-	// @Ignore
+	// Cannot mock final methods findUserJoke.
+	// when(userService.findUserJoke("test_user")).thenReturn(user) doesn't mock
+	// the method findUserByJoke
+	@Ignore
 	@Test
 	public void testLoadUserByUsername_danger() {
 		User user = new User();
@@ -86,7 +90,7 @@ public class Level2AttentionMockitoTest {
 		Role userRole = new Role();
 		userRole.setRole(RolesEnum.ROLE_USER.toString());
 		user.getRoles().add(userRole);
-		// Cannot mock final methods findUserJoke
+
 		when(userService.findUserJoke("test_user")).thenReturn(user);
 
 		UserDetails springSecurityUser = userDetailsService
