@@ -34,7 +34,7 @@ public class Level2UserDetailsServiceImplMockitoTest {
 	 */
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadByUsername_throw_UsernameNotFoundException() {
-		// assign
+		// arrange
 		when(userService.findUser("test_user")).thenThrow(
 				new ObjectRetrievalFailureException(User.class, "test_user"));
 		// act

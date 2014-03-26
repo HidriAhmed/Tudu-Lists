@@ -40,7 +40,7 @@ public class Level1UserServiceImplMockitoTest {
 	 */
 	@Test
 	public void find_user_should_return_the_user() {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "test_user")).thenReturn(
 				expectedUser);
 		// act
@@ -57,7 +57,7 @@ public class Level1UserServiceImplMockitoTest {
 	 * verify
 	 */
 	public void update_user_should_call_entityManager_merge() {
-		// assign
+		// arrange
 
 		// act
 		userService.updateUser(expectedUser);
@@ -72,7 +72,7 @@ public class Level1UserServiceImplMockitoTest {
 	 * appel a entityManager.find avec le meme login. Méthode : findUser
 	 */
 	public void user_should_be_retrieved() {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "toto")).thenReturn(expectedUser);
 
 		// act
@@ -88,7 +88,7 @@ public class Level1UserServiceImplMockitoTest {
 	 */
 	@Test(expected = ObjectRetrievalFailureException.class)
 	public void error_should_be_thrown_when_a_user_is_not_found() {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "toto")).thenReturn(null);
 		// act
 		userService.findUser("toto");
@@ -104,7 +104,7 @@ public class Level1UserServiceImplMockitoTest {
 	@Test(expected = UserAlreadyExistsException.class)
 	public void exception_should_be_thrown_when_creating_an_already_existed_user()
 			throws UserAlreadyExistsException {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "test_user")).thenReturn(
 				expectedUser);
 		// act
@@ -118,7 +118,7 @@ public class Level1UserServiceImplMockitoTest {
 	 */
 	@Test
 	public void new_user_should_be_saved() throws UserAlreadyExistsException {
-		// assign
+		// arrange
 
 		// act
 		userService.createUser(expectedUser);

@@ -65,7 +65,7 @@ public class Level1UserDetailsServiceImplMockitoTest {
 	 */
 	@Test
 	public void userDetails_should_correspond_to_the_user_found() {
-		// assign
+		// arrange
 		when(userService.findUser("my_test_user")).thenReturn(expectedUser);
 
 		// act

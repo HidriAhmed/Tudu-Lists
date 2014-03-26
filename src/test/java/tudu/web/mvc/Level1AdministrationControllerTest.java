@@ -60,7 +60,7 @@ public class Level1AdministrationControllerTest {
 	@Test
 	public void display_should_put_smtp_config_properties_in_admin_model_when_page_is_configuration()
 			throws Exception {
-		// assign
+		// arrange
 		when(cfgService.getProperty(STATIC_PATH_PROPERTY_NAME)).thenReturn(
 				property("staticPath"));
 		when(cfgService.getProperty(GOOGLE_ANALYTICS_PROPERTY_NAME))
@@ -95,7 +95,7 @@ public class Level1AdministrationControllerTest {
 	 */
 	@Test
 	public void update_shouldnt_return_a_null_model() throws Exception {
-		// assign
+		// arrange
 		when(userService.findUsersByLogin("test_user")).thenReturn(users);
 
 		// act

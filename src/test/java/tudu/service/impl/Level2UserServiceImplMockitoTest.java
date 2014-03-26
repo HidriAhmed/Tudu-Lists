@@ -43,7 +43,7 @@ public class Level2UserServiceImplMockitoTest {
 	@SuppressWarnings("unchecked")
 	@Test(expected = RuntimeException.class)
 	public void when_an_exception_is_thrown_by_entityManager_then_rethrow() {
-		// assign
+		// arrange
 		when(entityManager.merge(expectedUser)).thenThrow(
 				RuntimeException.class);
 
@@ -64,7 +64,7 @@ public class Level2UserServiceImplMockitoTest {
 	@Test
 	public void when_creation_of_a_new_user_then_4_calls_to_entityManager_persist()
 			throws UserAlreadyExistsException {
-		// assign
+		// arrange
 
 		// act
 		for (int i = 0; i < 4; i++) {
@@ -82,7 +82,7 @@ public class Level2UserServiceImplMockitoTest {
 	 */
 	public void when_creation_of_a_new_user_then_between_2_and_5_calls_to_entityManager_persist()
 			throws UserAlreadyExistsException {
-		// assign
+		// arrange
 
 		// act
 		for (int i = 0; i < 4; i++) {
@@ -99,7 +99,7 @@ public class Level2UserServiceImplMockitoTest {
 	 */
 	@Test
 	public void when_the_login_already_exist_then_persist_never_called_1() {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "test_user")).thenReturn(
 				expectedUser);
 
@@ -123,7 +123,7 @@ public class Level2UserServiceImplMockitoTest {
 
 	@Test
 	public void when_the_login_already_exist_then_persist_never_called_2() {
-		// assign
+		// arrange
 		when(entityManager.find(User.class, "test_user")).thenReturn(
 				expectedUser);
 

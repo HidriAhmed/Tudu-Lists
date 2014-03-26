@@ -39,7 +39,7 @@ public class Level3UserServiceImplMockitoTest {
 	 */
 	@Test
 	public void verify_createTodoLoist_has_list_with_name_Welcome() {
-		// assign
+		// arrange
 		TodoList todoList = new TodoList();
 		todoList.setName("Welcome!");
 		todoList.setLastUpdate(Calendar.getInstance().getTime());
@@ -56,7 +56,7 @@ public class Level3UserServiceImplMockitoTest {
 	 */
 	@Test
 	public void verify_createTodoLoist_has_list_with_name_Welcome_2() {
-		// assign
+		// arrange
 
 		// act
 		TodoList todoList = userService.createNewTodoList(expectedUser);
